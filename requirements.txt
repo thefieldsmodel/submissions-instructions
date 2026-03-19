@@ -1,0 +1,12 @@
+pandas==2.2.3
+polars==1.28.0
+numpy==2.1.2
+vllm==0.8.4
+transformers==4.57.1
+pyarrow==19.0.1
+typer==0.12.3
+datasets==2.21.0
+accelerate==1.11.0
+peft==0.13.2
+bitsandbytes>=0.48.1
+wandb==0.18.5

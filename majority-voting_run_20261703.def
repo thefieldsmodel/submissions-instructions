@@ -1,0 +1,33 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.9.1-cuda12.8-cudnn9-runtime
+
+%files
+    ./src/* /app/
+
+%environment
+    HF_HOME=/tmp/hf
+    TRANSFORMERS_CACHE=/tmp/hf
+    XDG_CACHE_HOME=/tmp/xdg
+    HUGGINGFACE_HUB_CACHE=/tmp/hf
+    TORCH_HOME=/tmp/torch
+    TORCHINDUCTOR_CACHE_DIR=/tmp/torchinductor
+    TRITON_CACHE_DIR=/tmp/triton
+    VLLM_CACHE_DIR=/tmp/vllm
+    #NCCL_NVLS_ENABLE=0
+    #NCCL_NVLS_CHANNEL_AGGREGATION_DISABLE=1
+    #NCCL_P2P_DISABLE=1
+    #NCCL_SHM_DISABLE=1
+
+
+%post
+    mkdir -p /app
+    cd /app
+    apt-get update
+    apt-get install -y build-essential
+    python -m pip install --no-cache-dir --root-user-action=ignore -r /app/requirements.txt
+
+%test
+    echo $NCCL_NVLS_ENABLE
+
+%runscript
+    python /app/run.py "$@"

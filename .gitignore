@@ -1,0 +1,6 @@
+*.sif
+*.parquet
+*.csv
+wandb/
+weights/
+**/__pycache__/
