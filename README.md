@@ -31,6 +31,8 @@ The next sections outline the precise rules and standardized interface for the U
 
 If you cannot follow these in detail, we will not be able to proceed to run or train your model.
 
+It is important for us to keep your data and models safe and isolated from other teams, so everything you submit will be kept strictly private until at least the end of the competition.
+
 ## 1. The URL
 
 We will solely use [S3 buckets](https://aws.amazon.com/s3/) to manage file transfer. This is well-maintained and comparatively cheap way to host very large files (e.g., hundreds of GB of model weights). It is your responsibility to maintain this and to cover any associated costs -- which should be minimal compared to costs you would incur when training models yourself.
@@ -44,6 +46,19 @@ We will download all artefacts required to run your submission from the URL you 
 Below we describe the exact contents of the container package. These are only valid for the container in the run variant. For a container in train variant (see section 2b) the contents are slightly different.
 
 Note that containers in both variants are not stateful, i.e., files written inside the container will be gone once it is "down" again after running. Thus, the container should write its final artefacts that are to be uploaded to the host -- and the paths should be reflected in `upload.py`. The container will be able to access the file system of the host, and our interface is designed so that we can pass the appropriate locations to the container.
+
+You will be asked in both cases to document, using a **`README.md`** file what your container does. This is solely for our information so we can understand how our infrastructure is being used, as well to identify how to prioritize application in case there are too many. We will prioritize based on the scientific merit, feasibility, and resource allocation, i.e. if and how many GPUs we will provide you with for free. 
+
+In the `README.me`, Each point should be addressed in at least a few sentences.
+
+**Proposed Methodology and Innovation**
+Describe the technical approach you plan to use (e.g., architecture, training strategy, fine-tuning method, data curation, evaluation, etc.). Clearly state that your idea is novel, or what is distinct about your approach when compared to existing artifacts.
+
+**Expected Outcomes**
+Specify the expected results after training, including at least the target capabilities, benchmark or evaluation criteria. Furthermore, specify whether the outcome is exploratory, an incremental improvement or intended to reach state-of-the-art performance on the given metric.
+
+**Intended Use of the Trained Artifact**
+Explain how you intend to use the resulting model (or artifact) for AIMO3. This could be for further research or experimentation, evaluation, integration into a downstream system,  or an open-source release (with a permissible license) related to your AIMO3 submission(s).
 
 #### Run variant main items
 
